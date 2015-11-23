@@ -1,2 +1,28 @@
 # Laravel 4.2 ajax latest news
-This is simple "latest news" area for your website. Obviously this can be anything you want but I wanted to make simple news area for website, so here it is.
+
+Obviously this can be anything you want but I wanted to make simple news area for website, so here it is.
+Tested on Laravel 4.2
+
+**Create news table**
+```sql
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `ts` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+```
+
+**Add some test news**
+```sql
+INSERT INTO `news` (`id`, `title`, `content`, `ts`) VALUES
+(1, 'News 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus varius ante vel scelerisque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque, ante sed vehicula semper, arcu sem vulputate dui, eget consectetur tortor lacus id nisl. Sed nunc enim, ultrices a purus eu, dictum blandit ex. Donec vehicula finibus auctor. Aliquam at erat venenatis, porttitor quam a, tempus leo. Vestibulum feugiat ex quis risus aliquet sagittis. Etiam interdum sed ligula vitae faucibus. Nulla pretium arcu id felis consectetur blandit. Curabitur eu pellentesque risus, in vehicula massa. ', '2015-11-01'),
+(2, 'News 2', 'Sed id facilisis mauris. Fusce pharetra quam ut convallis tempus. Nunc tempus, velit feugiat congue faucibus, justo mauris sodales quam, in euismod orci lectus vitae arcu. Cras non dignissim orci. Nunc diam nisi, pretium id congue a, pellentesque ut mauris. Ut sed tempor dui. Nam porta posuere luctus. Integer lacinia aliquam euismod. Cras bibendum ligula ac nisi egestas gravida. Sed nec eleifend ligula. Mauris eget tellus et risus suscipit feugiat nec eu lorem. Integer eu volutpat tortor, sit amet volutpat nunc. ', '2015-11-02'),
+(3, 'News 3', 'Aliquam ac sagittis nibh, id dapibus dui. Integer hendrerit eleifend quam. Nam non lectus mauris. Suspendisse condimentum ipsum vel massa congue consequat. In sit amet commodo lacus. Pellentesque id velit a elit iaculis tincidunt at ac nisl. Quisque quam leo, vestibulum ac porttitor quis, tincidunt quis lectus. Etiam placerat enim ac est viverra, nec scelerisque turpis euismod. Ut iaculis sem ut finibus cursus. Sed volutpat, dui eget tincidunt vestibulum, purus nisl mollis tellus, et dictum turpis lorem et sapien. Aenean maximus quam ut nisi accumsan, in semper nulla pellentesque. Pellentesque mauris mauris, eleifend eget tincidunt in, rutrum non dolor. ', '2015-11-03'),
+(4, 'News 4', 'Maecenas erat mauris, pharetra nec porta in, malesuada vitae sapien. Nunc a semper mauris. Morbi nec condimentum orci. Duis dui turpis, hendrerit sed eros sed, porta blandit eros. Nam tempus vel nisl non lacinia. Aenean in velit eget justo tincidunt consectetur nec id justo. Sed odio metus, elementum et sagittis et, condimentum sit amet massa. ', '2015-11-04'),
+(5, 'News 5', 'Fusce condimentum dictum nulla ac ultrices. Proin in ipsum vel nulla pharetra pellentesque. Vivamus non eros malesuada, iaculis augue at, hendrerit felis. Cras dignissim libero id orci convallis luctus. Fusce aliquet a tellus vitae ullamcorper. In laoreet, tellus eu finibus consequat, lectus diam ultrices velit, eu luctus nisi metus sed leo. Curabitur nisi diam, mollis ut tempus vel, ullamcorper vel erat. Aliquam vel elit ut orci efficitur varius. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras finibus maximus lacus eget varius. Sed facilisis ut sapien nec facilisis. Nullam vitae purus vehicula, sodales velit eget, lacinia lorem. ', '2015-11-05'),
+(6, 'News 6', 'Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi a elit malesuada, volutpat purus nec, ultrices velit. Donec imperdiet erat nec lectus lacinia tristique. Integer laoreet, felis nec malesuada laoreet, dui ex bibendum lacus, nec vehicula magna sapien at erat. Nullam viverra laoreet metus, at faucibus ligula ultricies vitae. Vivamus volutpat lacinia nisl et tincidunt. Fusce a interdum magna. Suspendisse dapibus urna nisi, vitae dictum odio elementum eu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum placerat faucibus dolor ut lobortis. Sed vel lectus et quam faucibus volutpat ut blandit justo. ', '2015-11-06'),
+(7, 'News 7', 'Nulla sagittis lectus in enim viverra, sed elementum ante convallis. Donec nec nisl tempus, consectetur lacus ac, convallis sapien. Proin sagittis mattis eros eget lobortis. Sed volutpat urna ut erat bibendum, congue iaculis dui pellentesque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris mollis, odio et dictum mattis, leo urna scelerisque diam, eget faucibus odio magna vitae ante. Vivamus sapien enim, dapibus quis risus sit amet, rhoncus facilisis nisi. Aliquam condimentum eros ut diam feugiat bibendum. Nunc dignissim ultricies dignissim. Aliquam fermentum finibus tellus, id cursus enim elementum ac. Proin pretium tortor eu velit imperdiet consequat. Etiam molestie non magna ac eleifend. Ut consectetur lorem sem, eget bibendum purus laoreet quis. Nam cursus urna eu nunc dictum, non finibus felis aliquet. ', '2015-11-07'),
+(8, 'News 8', 'Phasellus sodales sem in purus condimentum pretium. Proin arcu elit, accumsan a venenatis et, ullamcorper sit amet erat. Nulla malesuada dui diam, at iaculis ante commodo ut. Morbi ipsum eros, consectetur non mattis ac, accumsan quis sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi porttitor leo eu aliquam commodo. Etiam fringilla tortor nec vehicula condimentum. ', '2015-11-08');
+```
