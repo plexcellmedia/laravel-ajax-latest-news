@@ -12,9 +12,6 @@
 
 @section('scripts')
 
-	{{ HTML::script(url('assets/js/plugins.min.js')) }}
-	{{ HTML::script(url('assets/js/bootslider.min.js')) }}
-
 	<script type="text/javascript">
 
 		var cache = [];
