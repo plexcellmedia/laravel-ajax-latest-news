@@ -6,7 +6,7 @@
 	</div>
 
 	<div class="news">
-		@include('layouts.news')
+		@include('news')
 	</div>
 @stop
 
